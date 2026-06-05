@@ -50,23 +50,23 @@ def send_reminders():
                 print("Date Parsing Error:", e)
                 continue
 
+            if now <= appointment_time <= next_hour:
+                try:
 
-            try:
+                    # Send WhatsApp/SMS Reminder
+                    message = client.messages.create(
+                        body=(
+                            f"Reminder: \nHello Vasan S \n"
+                            f"you have a appointment with \n"
+                            f"{appointment['customer_name']}, at "
+                            f"{appointment['appointment_time']}"
+                        ),
+                        from_=f"whatsapp:{os.getenv('TWILIO_PHONE')}",
+                        to=f"whatsapp:{os.getenv('phone')}"
+                    )
 
-                # Send WhatsApp/SMS Reminder
-                message = client.messages.create(
-                    body=(
-                        f"Reminder: \nHello Vasan S \n"
-                        f"you have a appointment with \n"
-                        f"{appointment['customer_name']}, at "
-                        f"{appointment['appointment_time']}"
-                    ),
-                    from_=f"whatsapp:{os.getenv('TWILIO_PHONE')}",
-                    to=f"whatsapp:{os.getenv('phone')}"
-                )
-
-                print(message.sid)
-                print(message.status)
+                    print(message.sid)
+                    print(message.status)
 
                 # Update reminder status
                 supabase.table("appointments") \
