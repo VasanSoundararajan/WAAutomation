@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointment System</title>
+</head>
+<body>
+
+<h1>Appointment Reminder System</h1>
+
+<form action="/add" method="post">
+
+    <input
+        type="text"
+        name="customer_name"
+        placeholder="Customer Name"
+        required
+    >
+
+    <input
+        type="text"
+        name="phone"
+        placeholder="Phone Number"
+        required
+    >
+
+    <input
+        type="datetime-local"
+        name="appointment_time"
+        required
+    >
+
+    <button type="submit">
+        Save Appointment
+    </button>
+
+</form>
+
+<hr>
+
+<h2>Appointments</h2>
+
+{% for a in appointments %}
+
+<div>
+    <p>{{a.customer_name}}</p>
+    <p>{{a.phone}}</p>
+    <p>{{a.appointment_time}}</p>
+</div>
+
+<hr>
+
+{% endfor %}
+
+</body>
+</html>
