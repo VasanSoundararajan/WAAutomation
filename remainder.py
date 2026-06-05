@@ -62,7 +62,7 @@ def send_reminders():
                         f"{appointment['appointment_time']}"
                     ),
                     from_=f"whatsapp:{os.getenv('TWILIO_PHONE')}",
-                    to=f"whatsapp:+919043652108"
+                    to=f"whatsapp:{os.getenv('phone')}"
                 )
 
                 print(message.sid)

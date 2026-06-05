@@ -48,21 +48,4 @@ async def add_appointment(
         "appointment_time": appointment_time
     }).execute()
 
-    try:
-        message = client.messages.create(
-            body=(
-                f"Reminder: Hello "
-                f"{appointment['customer_name']}, "
-                f"your appointment is at "
-                f"{appointment['appointment_time']}"
-            ),
-            from_=f"whatsapp:{os.getenv('TWILIO_PHONE')}",
-            to=f"whatsapp:{appointment['phone']}"
-        )
-        print(message.sid)
-        print(message.status)
-
-    except Exception as e:
-        print(e)
-
     return {"message": "Appointment Added"}
